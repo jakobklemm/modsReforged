@@ -1,11 +1,6 @@
-#![cfg_attr(
-    all(not(debug_assertions), target_os = "windows"),
-    windows_subsystem = "windows"
-)]
-
 mod list;
 mod reader;
-use clap::{App, Arg, SubCommand};
+use clap::{App, Arg};
 use colored::Colorize;
 use std::io;
 use list::Mod;
@@ -29,8 +24,9 @@ fn main() {
         .get_matches();
 
     let path = matches.value_of("PATH").unwrap();
+    let path = std::path::Path::new(path);
 
-    let list = reader::read(path).unwrap();
+    let list = reader::read(&path).unwrap();
 
     println!("{}", format!(" - - - modsReforged - - - ").bold().red());
     println!("");
@@ -44,7 +40,7 @@ fn main() {
 
     println!("Enter numbers, space separated:");
     let mut numbers = String::new();
-    let mut stdin = io::stdin(); // We get `Stdin` here.
+    let stdin = io::stdin(); 
     stdin.read_line(&mut numbers).unwrap();
     let numbers = numbers.trim();
     let nums: Vec<usize> = numbers.split(' ').map(|x| {
