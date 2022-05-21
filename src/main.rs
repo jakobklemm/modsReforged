@@ -1,18 +1,14 @@
 mod list;
 mod reader;
 use clap::{App, Arg};
-use colored::Colorize;
 use std::io;
 use list::Mod;
 
 fn main() {
-    // tauri::Builder::default()
-    //   .run(tauri::generate_context!())
-    //   .expect("error while running tauri application");
     let matches = App::new("modsReforged")
         .version("0.1.0")
-        .author("Kevin K. <kbknapp@gmail.com>")
-        .about("Does awesome things")
+        .author("Jakob K. <github@jeykey.net>")
+        .about("Arma Reforger mod list generator.")
         .arg(
             Arg::with_name("PATH")
                 .short("p")
@@ -28,12 +24,12 @@ fn main() {
 
     let list = reader::read(&path).unwrap();
 
-    println!("{}", format!(" - - - modsReforged - - - ").bold().red());
+    println!("{}", format!(" - - - modsReforged - - - "));
     println!("");
     println!("{}", format!("Select mods from list.")); 
 
     for (i, m) in list.mods.iter().enumerate() {
-        let num = format!("{}", i).bold();
+        let num = format!("{}", i);
         let line = format!("{}: {}", num, m.name);
         println!("{}", line);
     }
@@ -60,10 +56,10 @@ fn main() {
     let el = list::ExportList(filtered);
 
     println!("");
-    println!("{}", format!(" - - - Prettified - - - ").bold().green());
+    println!("{}", format!(" - - - Prettified - - - "));
     let j = serde_json::to_string_pretty(&el).unwrap();
     println!("{}", j);
-    println!("{}", format!(" - - - Pterodactyl - - - ").bold().green());
+    println!("{}", format!(" - - - Pterodactyl - - - "));
     let j = serde_json::to_string(&el).unwrap();
     println!("{}", j);
 }
