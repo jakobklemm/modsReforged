@@ -30,7 +30,6 @@ fn main() {
 
     let path = matches.value_of("PATH").unwrap();
 
-    let path = std::path::Path::new("/home/jeykey/Downloads/mods/addons/");
     let list = reader::read(path).unwrap();
 
     println!("{}", format!(" - - - modsReforged - - - ").bold().red());
