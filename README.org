@@ -1,0 +1,15 @@
+#+TITLE: modsReforged
+#+AUTHOR: Jakob Klemm
+
+A command line mod list generator for Arma Reforger. 
+
+* How to use
+#+begin_src bash
+modsReforged --path "/absolute/path/to/your/mod/install/folder/"
+#+end_src
+The absolute path to your mod install folder is required. On windows
+this is normally under =Documents/My Games/ArmaReforger/addons/=.
+* Output
+The CLI will printout both a formatted and a compact JSON string. This
+is intended to be used in the Reforger Sever Config. The minimized
+version can directly be used in Pterodactyl.
